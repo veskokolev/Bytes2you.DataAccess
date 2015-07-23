@@ -5,13 +5,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
 {
-    public class DataRepositoryBaseMock<TDataEntity> : DataRepositoryBase<TDataEntity, int, UnitOfWorkMock>
+    public class DataRepositoryBaseMock<TDataEntity> : DataRepositoryBase<TDataEntity, int>
         where TDataEntity : class, IDataEntity<int>, new()
     {
         private readonly List<int> deleteEntityIdCalls;
 
-        public DataRepositoryBaseMock(UnitOfWorkMock unitOfWorkMock)
-            : base(unitOfWorkMock)
+        public DataRepositoryBaseMock(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
             this.deleteEntityIdCalls = new List<int>();
         }

@@ -5,20 +5,19 @@ using System.Linq;
 
 namespace Bytes2you.DataAccess
 {
-    public abstract class DataRepositoryBase<TDataEntity, TId, TUnitOfWork> : IRepository<TDataEntity, TId>
+    public abstract class DataRepositoryBase<TDataEntity, TId> : IRepository<TDataEntity, TId>
         where TDataEntity : class, IDataEntity<TId>, new()
-        where TUnitOfWork : class, IUnitOfWork
     {
-        private readonly TUnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public DataRepositoryBase(TUnitOfWork unitOfWork)
+        public DataRepositoryBase(IUnitOfWork unitOfWork)
         {
             Guard.WhenArgument(unitOfWork, "unitOfWork").IsNull().Throw();
 
             this.unitOfWork = unitOfWork;
         }
 
-        protected TUnitOfWork UnitOfWork
+        protected IUnitOfWork UnitOfWork
         {
             get
             {

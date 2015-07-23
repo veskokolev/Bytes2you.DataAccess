@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Bytes2you.DataAccess.EntityFramework
 {
-    public abstract class EfRepository<TDataEntity, TId> : DataRepositoryBase<TDataEntity, TId, IEfUnitOfWork>, IEfRepository<TDataEntity, TId>
+    public abstract class EfRepository<TDataEntity, TId> : DataRepositoryBase<TDataEntity, TId>, IEfRepository<TDataEntity, TId>
         where TDataEntity : class, IDataEntity<TId>, new()
     {   
         private bool isDisposed;
@@ -17,7 +17,7 @@ namespace Bytes2you.DataAccess.EntityFramework
         {
             get
             {
-                return this.UnitOfWork;
+                return (IEfUnitOfWork)this.UnitOfWork;
             }
         }
 
@@ -36,7 +36,7 @@ namespace Bytes2you.DataAccess.EntityFramework
 
             if (isDisposing)
             {
-                this.UnitOfWork.Dispose();
+                ((IEfUnitOfWork)this.UnitOfWork).Dispose();
             }
 
             this.isDisposed = true;
