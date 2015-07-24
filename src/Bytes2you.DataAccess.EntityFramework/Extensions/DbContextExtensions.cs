@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using Bytes2you.DataAccess.Data;
 using Bytes2you.Validation;
 
 namespace Bytes2you.DataAccess.EntityFramework.Extensions

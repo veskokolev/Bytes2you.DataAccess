@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bytes2you.DataAccess.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
@@ -10,13 +11,13 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
     {
         private readonly List<int> deleteEntityIdCalls;
 
-        public DataRepositoryBaseMock(IUnitOfWork unitOfWork)
+        public DataRepositoryBaseMock(IUnitOfWork<TDataEntity, int> unitOfWork)
             : base(unitOfWork)
         {
             this.deleteEntityIdCalls = new List<int>();
         }
 
-        public void AssertUnitOfWorkProperty(IUnitOfWork unitOfWork)
+        public void AssertUnitOfWorkProperty(IUnitOfWork<TDataEntity, int> unitOfWork)
         {
             Assert.AreSame(unitOfWork, this.UnitOfWork);
         }

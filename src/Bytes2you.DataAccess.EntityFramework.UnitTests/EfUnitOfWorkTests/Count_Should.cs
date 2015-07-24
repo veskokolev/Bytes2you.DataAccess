@@ -22,7 +22,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
                 entities.Add(entity);
 
                 // Act.
-                int resultCount = this.EfUnitOfWork.GetCount<PersonDataEntityMock, int>();
+                int resultCount = this.EfUnitOfWork.GetCount();
 
                 // Assert.
                 Assert.AreEqual(entities.Count(), resultCount);

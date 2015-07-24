@@ -1,32 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bytes2you.DataAccess.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
 {
-    public class UnitOfWorkMock : IUnitOfWork
+    public class UnitOfWorkMock<TDataEntity, TId> : IUnitOfWork<TDataEntity, TId>
+        where TDataEntity : class, IDataEntity<TId>
     {
-        private readonly List<object> getByIdCalls;
-        private readonly List<object> getByIdReturnValues;
-        private readonly List<object> getAllReturnValues;
+        private readonly List<TId> getByIdCalls;
+        private readonly List<TDataEntity> getByIdReturnValues;
+        private readonly List<TDataEntity[]> getAllReturnValues;
         private readonly List<int> getCountReturnValues;
-        private readonly List<object> registerNewCalls;
-        private readonly List<object> registerDirtyCalls;
-        private readonly List<object> registerRemovedCalls;
+        private readonly List<TDataEntity> registerNewCalls;
+        private readonly List<TDataEntity> registerDirtyCalls;
+        private readonly List<TDataEntity> registerRemovedCalls;
 
         public UnitOfWorkMock()
         {
-            this.getByIdCalls = new List<object>();
-            this.getByIdReturnValues = new List<object>();
-            this.getAllReturnValues = new List<object>();
+            this.getByIdCalls = new List<TId>();
+            this.getByIdReturnValues = new List<TDataEntity>();
+            this.getAllReturnValues = new List<TDataEntity[]>();
             this.getCountReturnValues = new List<int>();
-            this.registerNewCalls = new List<object>();
-            this.registerDirtyCalls = new List<object>();
-            this.registerRemovedCalls = new List<object>();
+            this.registerNewCalls = new List<TDataEntity>();
+            this.registerDirtyCalls = new List<TDataEntity>();
+            this.registerRemovedCalls = new List<TDataEntity>();
         }
 
-        public TDataEntity GetById<TDataEntity, TId>(TId id) where TDataEntity : class, IDataEntity<TId>
+        public TDataEntity GetById(TId id)
         {
             TDataEntity result = (TDataEntity)Activator.CreateInstance(typeof(TDataEntity));
 
@@ -36,14 +38,14 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
             return result;
         }
 
-        public IList<TDataEntity> GetAll<TDataEntity, TId>() where TDataEntity : class, IDataEntity<TId>
+        public TDataEntity[] GetAll()
         {
-            List<TDataEntity> result = new List<TDataEntity>();
+            TDataEntity[] result = new TDataEntity[5];
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < result.Length; i++)
             {
                 TDataEntity entity = (TDataEntity)Activator.CreateInstance(typeof(TDataEntity));
-                result.Add(entity);
+                result[i] = entity;
             }
 
             this.getAllReturnValues.Add(result);
@@ -51,7 +53,7 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
             return result;
         }
 
-        public int GetCount<TDataEntity, TId>() where TDataEntity : class, IDataEntity<TId>
+        public int GetCount()
         {
             int result = DateTime.Now.Second;
 
@@ -60,17 +62,17 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
             return result;
         }
 
-        public void RegisterNew<TDataEntity, TId>(TDataEntity entity) where TDataEntity : class, IDataEntity<TId>
+        public void RegisterNew(TDataEntity entity)
         {
             this.registerNewCalls.Add(entity);
         }
 
-        public void RegisterDirty<TDataEntity, TId>(TDataEntity entity) where TDataEntity : class, IDataEntity<TId>
+        public void RegisterDirty(TDataEntity entity)
         {
             this.registerDirtyCalls.Add(entity);
         }
 
-        public void RegisterRemoved<TDataEntity, TId>(TDataEntity entity) where TDataEntity : class, IDataEntity<TId>
+        public void RegisterRemoved(TDataEntity entity)
         {
             this.registerRemovedCalls.Add(entity);
         }
@@ -85,17 +87,17 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
             throw new NotImplementedException();
         }
 
-        public void AssertGetByIdCalls(params object[] calls)
+        public void AssertGetByIdCalls(params TId[] calls)
         {
             CollectionAssert.AreEqual(this.getByIdCalls, calls);
         }
 
-        public void AssertGetByIdReturnValues(params object[] returnValues)
+        public void AssertGetByIdReturnValues(params TDataEntity[] returnValues)
         {
             CollectionAssert.AreEqual(this.getByIdReturnValues, returnValues);
         }
 
-        public void AssertGetAllReturnValues(params object[] returnValues)
+        public void AssertGetAllReturnValues(params IEnumerable<TDataEntity>[] returnValues)
         {
             CollectionAssert.AreEqual(this.getAllReturnValues, returnValues);
         }
@@ -105,17 +107,17 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
             CollectionAssert.AreEqual(this.getCountReturnValues, returnValues);
         }
 
-        public void AssertRegisterNewCalls(params object[] calls)
+        public void AssertRegisterNewCalls(params TDataEntity[] calls)
         {
             CollectionAssert.AreEqual(this.registerNewCalls, calls);
         }
 
-        public void AssertRegisterDirtyCalls(params object[] calls)
+        public void AssertRegisterDirtyCalls(params TDataEntity[] calls)
         {
             CollectionAssert.AreEqual(this.registerDirtyCalls, calls);
         }
 
-        public void AssertRegisterRemovedCalls(params object[] calls)
+        public void AssertRegisterRemovedCalls(params TDataEntity[] calls)
         {
             CollectionAssert.AreEqual(this.registerRemovedCalls, calls);
         }

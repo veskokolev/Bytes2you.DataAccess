@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,11 +22,11 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             this.DbContextMock.MockSet<PersonDataEntityMock>().AddRange(entities);
 
             // Act.
-            IList<PersonDataEntityMock> resultEntities = this.EfUnitOfWork.GetAll<PersonDataEntityMock, int>();
+            PersonDataEntityMock[] resultEntities = this.EfUnitOfWork.GetAll();
 
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAsNoTrackingCallCount(1);
-            CollectionAssert.AreEqual(entities, resultEntities.ToList());
+            CollectionAssert.AreEqual(entities, resultEntities);
         }
     }
 }

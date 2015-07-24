@@ -15,7 +15,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             int id = 3;
 
             // Act.
-            PersonDataEntityMock resultEntity = this.EfUnitOfWork.GetById<PersonDataEntityMock, int>(id);
+            PersonDataEntityMock resultEntity = this.EfUnitOfWork.GetById(id);
 
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertFindCalls(id);

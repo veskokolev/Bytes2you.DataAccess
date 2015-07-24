@@ -16,7 +16,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Act & Assert.
             Ensure.ArgumentNullExceptionIsThrown(() =>
             {
-                this.EfUnitOfWork.RegisterNew<PersonDataEntityMock, int>(null);
+                this.EfUnitOfWork.RegisterNew(null);
             }, "entity");
         }
 
@@ -30,7 +30,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Act & Assert.
             Ensure.ArgumentExceptionIsThrown(() =>
             {
-                this.EfUnitOfWork.RegisterNew<PersonDataEntityMock, int>(entity);
+                this.EfUnitOfWork.RegisterNew(entity);
             }, "entity");
         }
 
@@ -41,7 +41,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             PersonDataEntityMock entity = new PersonDataEntityMock();
 
             // Act.
-            this.EfUnitOfWork.RegisterNew<PersonDataEntityMock, int>(entity);
+            this.EfUnitOfWork.RegisterNew(entity);
 
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAddCalls(entity);

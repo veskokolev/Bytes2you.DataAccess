@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Bytes2you.DataAccess.Data;
 using Bytes2you.DataAccess.EntityFramework.Extensions;
 using Bytes2you.Validation;
 
 namespace Bytes2you.DataAccess.EntityFramework
 {
-    public class EfUnitOfWork : IEfUnitOfWork, IDisposable
+    public class EfUnitOfWork<TDataEntity, TId> : IEfUnitOfWork<TDataEntity, TId>, IDisposable
+        where TDataEntity : class, IDataEntity<TId>
     {
         private bool isDisposed;
         private readonly DbContext dbContext;
@@ -27,22 +29,22 @@ namespace Bytes2you.DataAccess.EntityFramework
             }
         }
 
-        public TDataEntity GetById<TDataEntity, TId>(TId id) where TDataEntity : class, IDataEntity<TId>
+        public TDataEntity GetById(TId id)
         {
             return this.DbContext.Set<TDataEntity>().Find(id);
         }
 
-        public IList<TDataEntity> GetAll<TDataEntity, TId>() where TDataEntity : class, IDataEntity<TId>
+        public TDataEntity[] GetAll()
         {
-            return this.DbContext.Set<TDataEntity>().AsNoTracking().ToList();
+            return this.DbContext.Set<TDataEntity>().AsNoTracking().ToArray();
         }
         
-        public int GetCount<TDataEntity, TId>() where TDataEntity : class, IDataEntity<TId>
+        public int GetCount()
         {
             return this.DbContext.Set<TDataEntity>().Count();
         }
 
-        public void RegisterNew<TDataEntity, TId>(TDataEntity entity) where TDataEntity : class, IDataEntity<TId>
+        public void RegisterNew(TDataEntity entity)
         {
             Guard.WhenArgument(entity, "entity").IsNull().Throw();
             this.DbContext.ThrowIfAttached(entity);
@@ -50,7 +52,7 @@ namespace Bytes2you.DataAccess.EntityFramework
             this.DbContext.Set<TDataEntity>().Add(entity);
         }
 
-        public void RegisterDirty<TDataEntity, TId>(TDataEntity entity) where TDataEntity : class, IDataEntity<TId>
+        public void RegisterDirty(TDataEntity entity)
         {
             Guard.WhenArgument(entity, "entity").IsNull().Throw();
             this.DbContext.ThrowIfAttached(entity);
@@ -59,7 +61,7 @@ namespace Bytes2you.DataAccess.EntityFramework
 			this.DbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void RegisterRemoved<TDataEntity, TId>(TDataEntity entity) where TDataEntity : class, IDataEntity<TId>
+        public void RegisterRemoved(TDataEntity entity)
         {
             Guard.WhenArgument(entity, "entity").IsNull().Throw();
 

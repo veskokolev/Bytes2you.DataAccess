@@ -57,19 +57,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DataRepositoryBaseTests\Constructors_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\DataRepositoryBaseTestBase.cs" />
-    <Compile Include="DataRepositoryBaseTests\DeleteAll_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\Delete_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\GetAll_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\GetById_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\GetCount_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\InsertAll_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\Insert_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\SaveAll_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\Save_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\UpdateAll_Should.cs" />
-    <Compile Include="DataRepositoryBaseTests\Update_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\Constructors_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\DataRepositoryBaseTestBase.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\DeleteAll_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\Delete_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\GetAll_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\GetById_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\GetCount_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\InsertAll_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\Insert_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\SaveAll_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\Save_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\UpdateAll_Should.cs" />
+    <Compile Include="Data\DataRepositoryBaseTests\Update_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testing\Helpers\Ensure.cs" />
     <Compile Include="Testing\Mocks\DataRepositoryBaseMock.cs" />

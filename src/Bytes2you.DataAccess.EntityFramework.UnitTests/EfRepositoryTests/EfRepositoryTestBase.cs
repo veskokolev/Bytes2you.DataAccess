@@ -8,14 +8,14 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfRepositoryTests
     public abstract class EfRepositoryTestBase
     {
         protected EfRepositoryMock<PersonDataEntityMock, int> EfRepositoryMock { get; private set; }
-        protected EfUnitOfWorkMock EfUnitOfWork { get; private set; }
+        protected EfUnitOfWorkMock<PersonDataEntityMock, int> EfUnitOfWork { get; private set; }
 
         [TestInitialize]
         public void Initialize()
         {
             // Arrange.
             DbContextMock dbContextMock = new DbContextMock();
-            this.EfUnitOfWork = new EfUnitOfWorkMock(dbContextMock);
+            this.EfUnitOfWork = new EfUnitOfWorkMock<PersonDataEntityMock, int>(dbContextMock);
             this.EfRepositoryMock = new EfRepositoryMock<PersonDataEntityMock,int>(this.EfUnitOfWork);
         }
 

@@ -16,7 +16,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Act & Assert.
             Ensure.ArgumentNullExceptionIsThrown(() =>
             {
-                this.EfUnitOfWork.RegisterDirty<PersonDataEntityMock, int>(null);
+                this.EfUnitOfWork.RegisterDirty(null);
             }, "entity");
         }
 
@@ -31,7 +31,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Act & Assert.
             Ensure.ArgumentExceptionIsThrown(() =>
             {
-                this.EfUnitOfWork.RegisterDirty<PersonDataEntityMock, int>(entity);
+                this.EfUnitOfWork.RegisterDirty(entity);
             }, "entity");
         }
 
@@ -42,7 +42,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             PersonDataEntityMock entity = new PersonDataEntityMock();
 
             // Act.
-            this.EfUnitOfWork.RegisterDirty<PersonDataEntityMock, int>(entity);
+            this.EfUnitOfWork.RegisterDirty(entity);
 
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAttachCalls(entity);
@@ -61,7 +61,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
                     Assert.AreEqual(EntityState.Detached, this.DbContextMock.Entry(entity).State);
                 };
 
-            this.EfUnitOfWork.RegisterDirty<PersonDataEntityMock, int>(entity);
+            this.EfUnitOfWork.RegisterDirty(entity);
 
             Assert.AreEqual(EntityState.Modified, this.DbContextMock.Entry(entity).State);
         }

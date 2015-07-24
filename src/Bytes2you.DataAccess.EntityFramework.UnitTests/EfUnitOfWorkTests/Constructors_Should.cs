@@ -15,7 +15,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Act & Assert.
             Ensure.ArgumentNullExceptionIsThrown(() =>
             {
-                new EfUnitOfWork(null);
+                new EfUnitOfWork<PersonDataEntityMock, int>(null);
             }, "dbContext");
         }
 
@@ -26,7 +26,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             DbContextMock dbContextMock = new DbContextMock();
 
             // Act.
-            EfUnitOfWork efUnitOfWork = new EfUnitOfWork(dbContextMock);
+            EfUnitOfWork<PersonDataEntityMock, int> efUnitOfWork = new EfUnitOfWork<PersonDataEntityMock, int>(dbContextMock);
 
             // Assert.
             Assert.AreSame(dbContextMock, efUnitOfWork.DbContext);

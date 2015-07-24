@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.Data;
 
 namespace Bytes2you.DataAccess.EntityFramework
 {
@@ -8,16 +9,16 @@ namespace Bytes2you.DataAccess.EntityFramework
     {   
         private bool isDisposed;
 
-        public EfRepository(IEfUnitOfWork unitOfWork)
+        public EfRepository(IEfUnitOfWork<TDataEntity, TId> unitOfWork)
             : base(unitOfWork)
         {
         }
 
-        IEfUnitOfWork IEfRepository<TDataEntity, TId>.UnitOfWork
+        IEfUnitOfWork<TDataEntity, TId> IEfRepository<TDataEntity, TId>.UnitOfWork
         {
             get
             {
-                return (IEfUnitOfWork)this.UnitOfWork;
+                return (IEfUnitOfWork<TDataEntity, TId>)this.UnitOfWork;
             }
         }
 
@@ -36,7 +37,7 @@ namespace Bytes2you.DataAccess.EntityFramework
 
             if (isDisposing)
             {
-                ((IEfUnitOfWork)this.UnitOfWork).Dispose();
+                ((IEfUnitOfWork<TDataEntity, TId>)this.UnitOfWork).Dispose();
             }
 
             this.isDisposed = true;

@@ -15,7 +15,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Act & Assert.
             Ensure.ArgumentNullExceptionIsThrown(() =>
             {
-                this.EfUnitOfWork.RegisterRemoved<PersonDataEntityMock, int>(null);
+                this.EfUnitOfWork.RegisterRemoved(null);
             }, "entity");
         }
 
@@ -26,7 +26,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             PersonDataEntityMock entity = new PersonDataEntityMock();
 
             // Act.
-            this.EfUnitOfWork.RegisterRemoved<PersonDataEntityMock, int>(entity);
+            this.EfUnitOfWork.RegisterRemoved(entity);
 
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAttachCalls(entity);
@@ -45,7 +45,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
                     this.DbContextMock.MockSet<PersonDataEntityMock>().AssertRemoveCalls();
                 };
 
-            this.EfUnitOfWork.RegisterRemoved<PersonDataEntityMock, int>(entity);
+            this.EfUnitOfWork.RegisterRemoved(entity);
 
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAttachCalls(entity);
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertRemoveCalls(entity);

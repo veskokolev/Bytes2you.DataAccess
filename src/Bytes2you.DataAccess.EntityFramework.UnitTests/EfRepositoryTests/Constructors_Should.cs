@@ -24,7 +24,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfRepositoryTests
         {
             // Arrange.
             DbContextMock dbContextMock = new DbContextMock();
-            EfUnitOfWork unitOfWorkMock = new EfUnitOfWork(dbContextMock);
+            EfUnitOfWork<PersonDataEntityMock, int> unitOfWorkMock = new EfUnitOfWork<PersonDataEntityMock, int>(dbContextMock);
 
             // Act.
             EfRepositoryMock<PersonDataEntityMock, int> dataRepository = new EfRepositoryMock<PersonDataEntityMock, int>(unitOfWorkMock);

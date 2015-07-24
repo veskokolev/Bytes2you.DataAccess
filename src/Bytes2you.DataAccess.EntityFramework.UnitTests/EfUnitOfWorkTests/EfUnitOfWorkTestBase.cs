@@ -7,7 +7,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
 {
     public abstract class EfUnitOfWorkTestBase
     {
-        protected EfUnitOfWork EfUnitOfWork { get; private set; }
+        protected EfUnitOfWork<PersonDataEntityMock, int> EfUnitOfWork { get; private set; }
         protected DbContextMock DbContextMock { get; private set; }
 
         [TestInitialize]
@@ -15,7 +15,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
         {
             // Arrange.
             this.DbContextMock = new DbContextMock();
-            this.EfUnitOfWork = new EfUnitOfWork(this.DbContextMock);
+            this.EfUnitOfWork = new EfUnitOfWork<PersonDataEntityMock, int>(this.DbContextMock);
         }
 
         [TestCleanup]
