@@ -5,10 +5,19 @@ using Bytes2you.DataAccess.Data;
 namespace Bytes2you.DataAccess.Domain
 {
     public interface IEntityMapper<TDataEntity, TDomainEntity, TId>
-        where TDataEntity : IDataEntity<TId>
-        where TDomainEntity : IDomainEntity<TId>
+        where TDataEntity : class, IDataEntity<TId>, new()
+        where TDomainEntity : class, IDomainEntity<TId>, new()
     {
-        void ToDataEntity(TDomainEntity fromDomainEntity, TDataEntity toDataEntity);
-        void ToDomainEntity(TDataEntity fromDataEntity, TDomainEntity toDomainEntity);
+        void CopyPropertiesToDataEntity(TDomainEntity fromDomainEntity, TDataEntity toDataEntity);
+        void CopyPropertiesToDomainEntity(TDataEntity fromDataEntity, TDomainEntity toDomainEntity);
+
+        void CopyPropertiesToDataEntities(TDomainEntity[] fromDomainEntities, TDataEntity[] toDataEntities);
+        void CopyPropertiesToDomainEntities(TDataEntity[] fromDataEntities, TDomainEntity[] toDomainEntities);
+
+        TDataEntity ToDataEntity(TDomainEntity fromDomainEntity);
+        TDomainEntity ToDomainEntity(TDataEntity fromDataEntity);
+
+        TDataEntity[] ToDataEntities(TDomainEntity[] fromDomainEntities);
+        TDomainEntity[] ToDomainEntities(TDataEntity[] fromDataEntities);
     }
 }

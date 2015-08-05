@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -27,6 +28,28 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAsNoTrackingCallCount(1);
             CollectionAssert.AreEqual(entities, resultEntities);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            PersonDataEntityMock[] entities = new PersonDataEntityMock[]
+            {
+                new PersonDataEntityMock() { Id = 3 },
+                new PersonDataEntityMock() { Id = 4 },
+                new PersonDataEntityMock() { Id = 5 }
+            };
+
+            this.DbContextMock.MockSet<PersonDataEntityMock>().AddRange(entities);
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    this.EfUnitOfWork.GetAll();
+                },
+                ExecutionTimeType.Fast);
         }
     }
 }

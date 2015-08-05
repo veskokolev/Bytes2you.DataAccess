@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.UnitTests.Testing;
 using Bytes2you.DataAccess.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -20,7 +21,7 @@ namespace Bytes2you.DataAccess.UnitTests.Data.DataRepositoryBaseTests
         }
 
         [TestMethod]
-        public void SetAllGivenProperties()
+        public void SetUnitOfWorkProperty_WhenArgumentsAreValid()
         {
             // Arrange.
             UnitOfWorkMock<PersonDataEntityMock, int> unitOfWorkMock = new UnitOfWorkMock<PersonDataEntityMock, int>();
@@ -30,6 +31,21 @@ namespace Bytes2you.DataAccess.UnitTests.Data.DataRepositoryBaseTests
 
             // Assert.
             dataRepository.AssertUnitOfWorkProperty(unitOfWorkMock);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            UnitOfWorkMock<PersonDataEntityMock, int> unitOfWorkMock = new UnitOfWorkMock<PersonDataEntityMock, int>();
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    DataRepositoryBaseMock<PersonDataEntityMock> dataRepository = new DataRepositoryBaseMock<PersonDataEntityMock>(unitOfWorkMock);
+                },
+                ExecutionTimeType.Normal);
         }
     }
 }

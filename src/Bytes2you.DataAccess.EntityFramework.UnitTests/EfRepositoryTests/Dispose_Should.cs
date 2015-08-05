@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfRepositoryTests
@@ -27,6 +28,18 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfRepositoryTests
 
             // Assert.
             this.EfUnitOfWork.AssertDisposeCallCount(1);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    this.EfRepositoryMock.Dispose();
+                },
+                ExecutionTimeType.SuperFast);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -44,6 +45,18 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
 
             this.DbContextMock.AssertSaveCahngesCallCount(1);
             Assert.AreEqual(EntityState.Detached, this.DbContextMock.Entry(entity).State);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    this.EfUnitOfWork.Commit();
+                },
+                4, 1000);
         }
     }
 }

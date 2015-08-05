@@ -70,10 +70,38 @@
     <Compile Include="Data\DataRepositoryBaseTests\Save_Should.cs" />
     <Compile Include="Data\DataRepositoryBaseTests\UpdateAll_Should.cs" />
     <Compile Include="Data\DataRepositoryBaseTests\Update_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\Constructors_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\DeleteAll_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\Delete_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\DomainRepositoryBaseTestBase.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\GetAll_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\GetById_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\GetCount_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\InsertAll_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\Insert_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\SaveAll_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\Save_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\UpdateAll_Should.cs" />
+    <Compile Include="Domain\DomainRepositoryBaseTests\Update_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\CopyPropertiesToDataEntities_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\CopyPropertiesToDataEntity_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\CopyPropertiesToDomainEntities_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\CopyPropertiesToDomainEntity_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\EntityMapperBaseTestBase.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\ToDataEntities_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\ToDataEntity_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\ToDomainEntities_Should.cs" />
+    <Compile Include="Domain\EntityMapperBaseTests\ToDomainEntity_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing\Helpers\CollectionAsserterEx.cs" />
     <Compile Include="Testing\Helpers\Ensure.cs" />
+    <Compile Include="Testing\Helpers\ExecutionTimeType.cs" />
+    <Compile Include="Testing\Helpers\TupleHelper.cs" />
     <Compile Include="Testing\Mocks\DataRepositoryBaseMock.cs" />
+    <Compile Include="Testing\Mocks\DomainRepositoryBaseMock.cs" />
+    <Compile Include="Testing\Mocks\EntityMapperBaseMock.cs" />
     <Compile Include="Testing\Mocks\PersonDataEntityMock.cs" />
+    <Compile Include="Testing\Mocks\PersonDomainEntityMock.cs" />
     <Compile Include="Testing\Mocks\UnitOfWorkMock.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +113,7 @@
       <Name>Bytes2you.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

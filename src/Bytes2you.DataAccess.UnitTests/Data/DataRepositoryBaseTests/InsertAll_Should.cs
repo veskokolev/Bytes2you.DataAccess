@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.UnitTests.Testing;
 using Bytes2you.DataAccess.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -115,6 +116,26 @@ namespace Bytes2you.DataAccess.UnitTests.Data.DataRepositoryBaseTests
 
             // Assert.
             CollectionAssert.AreEqual(entities, resultEntity);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            PersonDataEntityMock[] entities = new PersonDataEntityMock[]
+            {
+                new PersonDataEntityMock(),
+                new PersonDataEntityMock(),
+                new PersonDataEntityMock()
+            };
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    this.DataRepository.InsertAll(entities);
+                },
+                ExecutionTimeType.Normal);
         }
     }
 }

@@ -28,6 +28,38 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
             this.registerRemovedCalls = new List<TDataEntity>();
         }
 
+        public IEnumerable<TDataEntity[]> GetAllReturnValues
+        {
+            get
+            {
+                return this.getAllReturnValues;
+            }
+        }
+
+        public IEnumerable<TDataEntity> RegisterNewCalls
+        {
+            get
+            {
+                return this.registerNewCalls;
+            }
+        }
+
+        public IEnumerable<TDataEntity> RegisterDirtyCalls
+        {
+            get
+            {
+                return this.registerDirtyCalls;
+            }
+        }
+
+        public IEnumerable<TDataEntity> RegisterRemovedCalls
+        {
+            get
+            {
+                return this.registerRemovedCalls;
+            }
+        }
+
         public TDataEntity GetById(TId id)
         {
             TDataEntity result = (TDataEntity)Activator.CreateInstance(typeof(TDataEntity));

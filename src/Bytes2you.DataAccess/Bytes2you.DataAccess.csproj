@@ -57,6 +57,7 @@
     <Compile Include="Data\IDataEntity.cs" />
     <Compile Include="Data\IDataRepository.cs" />
     <Compile Include="Domain\DomainRepositoryBase.cs" />
+    <Compile Include="Domain\EntityMapperBase.cs" />
     <Compile Include="Domain\IDomainEntity.cs" />
     <Compile Include="Domain\IDomainRepository.cs" />
     <Compile Include="Domain\IEntityMapper.cs" />

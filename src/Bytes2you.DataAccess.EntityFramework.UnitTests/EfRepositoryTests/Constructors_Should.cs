@@ -20,7 +20,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfRepositoryTests
         }
 
         [TestMethod]
-        public void SetAllGivenProperties()
+        public void SetUnitOfWorkProperty_WhenArgumentsAreValid()
         {
             // Arrange.
             DbContextMock dbContextMock = new DbContextMock();
@@ -31,6 +31,22 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfRepositoryTests
 
             // Assert.
             Assert.AreSame(unitOfWorkMock, ((IEfRepository<PersonDataEntityMock, int>)dataRepository).UnitOfWork);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            DbContextMock dbContextMock = new DbContextMock();
+            EfUnitOfWork<PersonDataEntityMock, int> unitOfWorkMock = new EfUnitOfWork<PersonDataEntityMock, int>(dbContextMock);
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    new EfRepositoryMock<PersonDataEntityMock, int>(unitOfWorkMock);
+                },
+                ExecutionTimeType.Fast);
         }
     }
 }

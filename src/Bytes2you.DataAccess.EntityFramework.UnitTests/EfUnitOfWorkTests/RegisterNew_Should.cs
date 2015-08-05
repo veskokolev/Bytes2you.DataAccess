@@ -46,5 +46,21 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertAddCalls(entity);
         }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            int i = 0;
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    PersonDataEntityMock entity = new PersonDataEntityMock() { Id = i++ };
+                    this.EfUnitOfWork.RegisterNew(entity);
+                },
+                5, 500);
+        }
     }
 }

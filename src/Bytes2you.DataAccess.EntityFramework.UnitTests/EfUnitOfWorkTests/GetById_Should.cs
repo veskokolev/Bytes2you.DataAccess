@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,6 +21,18 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             // Assert.
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertFindCalls(id);
             this.DbContextMock.MockSet<PersonDataEntityMock>().AssertFindReturnValues(resultEntity);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    this.EfUnitOfWork.GetById(3);
+                },
+                ExecutionTimeType.Fast);
         }
     }
 }

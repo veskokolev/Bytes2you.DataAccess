@@ -19,6 +19,9 @@ namespace Bytes2you.DataAccess.EntityFramework.Extensions
 
         public static void ThrowIfAttached<TId>(this DbContext @dbContext, IDataEntity<TId> entity)
         {
+            Guard.WhenArgument(@dbContext, "@dbContext").IsNull().Throw();
+            Guard.WhenArgument(entity, "entity").IsNull().Throw();
+
             Guard.WhenArgument(dbContext.IsAttached(entity), "entity").IsTrue().Throw();
         }
 

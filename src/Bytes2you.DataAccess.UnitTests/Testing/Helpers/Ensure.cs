@@ -110,7 +110,36 @@ namespace Bytes2you.DataAccess.UnitTests.Testing.Helpers
                 expectedTimeInMilliseconds, 
                 watch.ElapsedMilliseconds);
 
-            Assert.IsTrue(watch.ElapsedMilliseconds < expectedTimeInMilliseconds, assertionMessage);
+            Assert.IsTrue(watch.ElapsedMilliseconds <= expectedTimeInMilliseconds, assertionMessage);
+        }
+
+        public static void ActionRunsInExpectedTime(Action action, ExecutionTimeType executionTimeType)
+        {
+            int repeatCount = -1;
+            int expectedTimeInMilliseconds = -1;
+
+            switch (executionTimeType)
+            {
+                case ExecutionTimeType.Normal:
+                    repeatCount = 100;
+                    expectedTimeInMilliseconds = 5;
+                    break;
+
+                case ExecutionTimeType.Fast:
+                    repeatCount = 1000;
+                    expectedTimeInMilliseconds = 5;
+                    break;
+
+                case ExecutionTimeType.SuperFast:
+                    repeatCount = 10000;
+                    expectedTimeInMilliseconds = 5;
+                    break;
+
+                default:
+                    break;
+            }
+
+            ActionRunsInExpectedTime(action, repeatCount, expectedTimeInMilliseconds);
         }
     }
 }

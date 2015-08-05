@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bytes2you.DataAccess.UnitTests.Testing;
 using Bytes2you.DataAccess.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.UnitTests.Testing.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,7 +30,7 @@ namespace Bytes2you.DataAccess.UnitTests.Data.DataRepositoryBaseTests
             this.DataRepository.Delete(id);
 
             // Assert.
-            this.DataRepository.AssertDeleteEntityCalls(id);
+            this.DataRepository.AssertDeleteWithEntityCalls(id);
         }
 
         [TestMethod]
@@ -87,6 +88,21 @@ namespace Bytes2you.DataAccess.UnitTests.Data.DataRepositoryBaseTests
             this.DataRepository.Delete(entity);
 
             Assert.IsTrue(isCommitCalled);
+        }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            PersonDataEntityMock entity = new PersonDataEntityMock() { Id = 3 };
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    this.DataRepository.Delete(entity);
+                },
+                ExecutionTimeType.Normal);
         }
     }
 }

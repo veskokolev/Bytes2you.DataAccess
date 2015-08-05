@@ -65,5 +65,21 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
 
             Assert.AreEqual(EntityState.Modified, this.DbContextMock.Entry(entity).State);
         }
+
+        [TestMethod]
+        public void RunInExpectedTime()
+        {
+            // Arrange.
+            int i = 0;
+
+            // Act & Assert.
+            Ensure.ActionRunsInExpectedTime(
+                () =>
+                {
+                    PersonDataEntityMock entity = new PersonDataEntityMock() { Id = i++ };
+                    this.EfUnitOfWork.RegisterDirty(entity);
+                },
+                5, 300);
+        }
     }
 }
