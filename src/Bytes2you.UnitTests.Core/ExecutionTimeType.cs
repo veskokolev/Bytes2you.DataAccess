@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers
+namespace Bytes2you.UnitTests.Core
 {
     public enum ExecutionTimeType
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using Bytes2you.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers
+namespace Bytes2you.UnitTests.Core
 {
-    internal static class Ensure
+    public static class Ensure
     {
         public static void ArgumentExceptionIsThrown(Action action, string expectedArgumentName, string expectedMessage = null)
         {
@@ -110,36 +110,32 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers
                 expectedTimeInMilliseconds, 
                 watch.ElapsedMilliseconds);
 
-            Assert.IsTrue(watch.ElapsedMilliseconds < expectedTimeInMilliseconds, assertionMessage);
+            Assert.IsTrue(watch.ElapsedMilliseconds <= 1.2 * expectedTimeInMilliseconds, assertionMessage);
         }
 
         public static void ActionRunsInExpectedTime(Action action, ExecutionTimeType executionTimeType)
         {
-            int repeatCount = -1;
-            int expectedTimeInMilliseconds = -1;
+            int repeatCount;
 
             switch (executionTimeType)
             {
                 case ExecutionTimeType.Normal:
-                    repeatCount = 100;
-                    expectedTimeInMilliseconds = 5;
+                    repeatCount = 20;
                     break;
 
                 case ExecutionTimeType.Fast:
-                    repeatCount = 1000;
-                    expectedTimeInMilliseconds = 5;
+                    repeatCount = 200;
                     break;
 
                 case ExecutionTimeType.SuperFast:
-                    repeatCount = 10000;
-                    expectedTimeInMilliseconds = 5;
+                    repeatCount = 2000;
                     break;
 
                 default:
-                    break;
+                    throw new InvalidOperationException();
             }
 
-            ActionRunsInExpectedTime(action, repeatCount, expectedTimeInMilliseconds);
+            ActionRunsInExpectedTime(action, repeatCount, 1);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Helpers;
 using Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks;
+using Bytes2you.UnitTests.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests

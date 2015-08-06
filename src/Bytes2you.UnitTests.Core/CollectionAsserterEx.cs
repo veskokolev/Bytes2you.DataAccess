@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Bytes2you.DataAccess.UnitTests.Testing.Helpers
+namespace Bytes2you.UnitTests.Core
 {
-    internal static class CollectionAsserterEx
+    public static class CollectionAsserterEx
     {
         public static void AreSequenceEqual<T>(ICollection<IEnumerable<T>> expected, ICollection<IEnumerable<T>> actual)
         {

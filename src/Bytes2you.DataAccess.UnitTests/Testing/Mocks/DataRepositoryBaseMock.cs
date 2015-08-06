@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.DataAccess.Data;
-using Bytes2you.DataAccess.UnitTests.Testing.Helpers;
+using Bytes2you.UnitTests.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bytes2you.DataAccess.UnitTests.Testing.Mocks
