@@ -22,7 +22,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             this.EfUnitOfWork.Rollback();
 
             // Assert.
-            this.DbContextMock.AssertSaveCahngesCallCount(0);
+            this.DbContextMock.AssertSaveChangesCallCount(0);
             Assert.AreEqual(EntityState.Detached, this.DbContextMock.Entry(entity).State);
         }
 

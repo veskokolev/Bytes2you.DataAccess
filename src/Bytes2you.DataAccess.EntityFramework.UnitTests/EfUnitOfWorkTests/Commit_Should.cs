@@ -22,7 +22,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
             this.EfUnitOfWork.Commit();
 
             // Assert.
-            this.DbContextMock.AssertSaveCahngesCallCount(1);
+            this.DbContextMock.AssertSaveChangesCallCount(1);
             Assert.AreEqual(EntityState.Detached, this.DbContextMock.Entry(entity).State);
         }
 
@@ -43,7 +43,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.EfUnitOfWorkTests
 
             this.EfUnitOfWork.Commit();
 
-            this.DbContextMock.AssertSaveCahngesCallCount(1);
+            this.DbContextMock.AssertSaveChangesCallCount(1);
             Assert.AreEqual(EntityState.Detached, this.DbContextMock.Entry(entity).State);
         }
 
