@@ -66,7 +66,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks
             this.disposeCallCount++;
         }
 
-        public void AssertSaveCahngesCallCount(int callCount)
+        public void AssertSaveChangesCallCount(int callCount)
         {
             Assert.AreEqual(callCount, this.saveChangesCallCount);
         }
@@ -77,6 +77,7 @@ namespace Bytes2you.DataAccess.EntityFramework.UnitTests.Testing.Mocks
         }
 
         public event EventHandler PreSaveChanges;
+
         protected virtual void OnPreSaveChanges()
         {
             if (this.PreSaveChanges != null)
